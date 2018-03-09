@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.jati.simpleretrofit.R
 import com.jati.simpleretrofit.model.WeatherData
+import com.jati.simpleretrofit.utils.parseMillistToDate
 import kotlinx.android.synthetic.main.item_weather.view.*
 
 /**
@@ -25,8 +26,9 @@ class WeatherAdapter(val data: List<WeatherData>) : RecyclerView.Adapter<Weather
 
     inner class MyHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         fun bindData(weather: WeatherData) {
-            itemView.tv_title.text = weather.weather[0].main
-            itemView.tv_desc.text = weather.weather[0].desc
+            itemView.tv_title.text = weather.weather.first().main
+            itemView.tv_desc.text = weather.weather.first().desc
+            itemView.tv_date.text = parseMillistToDate(weather.dateTime)
         }
     }
 }
